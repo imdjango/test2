@@ -7,18 +7,24 @@ resource "aws_key_pair" "mykey" {
 }
 
 resource "aws_instance" "example" {
+  count         = var.instance_count
   ami           = lookup(var.AMIS, var.AWS_REGION)
   instance_type = "t2.micro"
-  provisioner "local-exec" {
-  command = "apt -y update"
-  command = "apt install -y nginx"
-  }
   key_name      = aws_key_pair.mykey.key_name
+
+  provisioner "file" {
+    source      = "script.sh"
+    destination = "/tmp/script.sh"
+  }
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/script.sh",
+      "sudo /tmp/script.sh"
+    ]
+  }
   connection {
+    host        = coalesce(self.public_ip, self.private_ip)
     user        = var.INSTANCE_USERNAME
     private_key = file(var.PATH_TO_PRIVATE_KEY)
-  }
-  tags = {
-    Name = "My Instance"
   }
 }
