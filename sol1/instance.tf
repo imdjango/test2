@@ -11,7 +11,7 @@ resource "aws_instance" "example" {
   instance_type = "t2.micro"
   provisioner "local-exec" {
   command = "apt -y update"
-  command = "apt install nginx"
+  command = "apt install -y nginx"
   }
   key_name      = aws_key_pair.mykey.key_name
   connection {
