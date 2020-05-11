@@ -2,6 +2,7 @@
 
 * Terraform 통한 instance 생성
 ```
+aws ec2 delete-key-pair --key-name mykey
 terraform destroy -auto-approve
 terraform init
 terraform apply -auto-approve
