@@ -9,6 +9,10 @@ resource "aws_key_pair" "mykey" {
 resource "aws_instance" "example" {
   ami           = lookup(var.AMIS, var.AWS_REGION)
   instance_type = "t2.micro"
+  provisioner "local-exec" {
+  command = "apt -y update"
+  command = "apt install nginx"
+  }
   key_name      = aws_key_pair.mykey.key_name
   connection {
     user        = var.INSTANCE_USERNAME
