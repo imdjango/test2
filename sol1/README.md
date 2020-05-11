@@ -5,8 +5,8 @@
 terraform destroy -auto-approve
 terraform init
 terraform apply -auto-approve
-(optional : cat terraform.tfstate|grep public_ip|grep -v associate)
-(alias as ta)
+(optional; cat terraform.tfstate|grep public_ip|grep -v associate)
+(alias as; ta)
 ```
 
 * Test
@@ -17,5 +17,5 @@ terraform apply -auto-approve
 * Terraform 통한 instance 삭제
 ```
 terraform destroy -auto-approve
-(alias as td)
+(alias as; td)
 ```
