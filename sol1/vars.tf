@@ -21,3 +21,6 @@ variable "AMIS" {
     us-east-1      = "ami-085925f297f89fce1"
   }
 }
+variable "instance_count" {
+  default = "1"
+}
